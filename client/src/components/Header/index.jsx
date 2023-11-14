@@ -24,6 +24,9 @@ const Header = () => {
               <Link className="btn btn-lg btn-primary m-2" to="/me">
                 View My Profile
               </Link>
+              <Link className="btn btn-lg btn-primary m-2" to="/">
+                Saved Recipes
+              </Link>
               <button className="btn btn-lg btn-light m-2" onClick={logout}>
                 Logout
               </button>
