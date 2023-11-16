@@ -1,0 +1,9 @@
+nav {
+    text-align:right;
+    margin-right: 5%;
+}
+
+li {
+    display:inline-block;
+    margin: 5px;
+}
