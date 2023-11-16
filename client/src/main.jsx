@@ -1,39 +1,23 @@
 import ReactDOM from 'react-dom/client'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom/dist'
-import './index.css'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 import App from './App.jsx'
-import Home from './pages/Home';
-import About from './pages/About';
-import Profile from './pages/Profile';
-import Signup from './pages/Signup';
-import Login from './pages/Login';
-import Error from './pages/Error';
+import SearchRecipes from './pages/SearchRecipes'
+import SavedRecipes from './pages/SavedRecipes'
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
-    error: <Error />,
+    errorElement: <h1 className='display-2'>Wrong page!</h1>,
     children: [
       {
         index: true,
-        element: <Home />
+        element: <SearchRecipes />
       }, {
-        path: '/login',
-        element: <Login />
-      }, {
-        path: '/about',
-        element: <About />
-      },{
-        path: '/signup',
-        element: <Signup />
-      }, {
-        path: '/me',
-        element: <Profile />
-      }, {
-        path: '/profiles/:profileId',
-        element: <Profile />
+        path: '/saved',
+        element: <SavedRecipes />
       }
     ]
   }
