@@ -27,6 +27,9 @@ const Header = () => {
               <Link className="btn btn-lg btn-primary m-2" to="/">
                 Saved Recipes
               </Link>
+              <Link className="btn btn-lg btn-light m-2" to="/about">
+                About
+              </Link>
               <button className="btn btn-lg btn-light m-2" onClick={logout}>
                 Logout
               </button>
@@ -38,6 +41,9 @@ const Header = () => {
               </Link>
               <Link className="btn btn-lg btn-light m-2" to="/signup">
                 Signup
+              </Link>
+              <Link className="btn btn-lg btn-light m-2" to="/about">
+                About
               </Link>
             </>
           )}
