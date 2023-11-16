@@ -52,6 +52,6 @@ export const deleteRecipe = (recipeId, token) => {
 
 // make a search to recipes api
 // https://www.googleapis.com/books/v1/volumes?q=harry+potter
-export const searchGoogleBooks = (query) => {
+export const searchSpoonacularRecipes = (query) => {
   return fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}`);
 };
