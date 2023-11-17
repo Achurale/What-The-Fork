@@ -54,4 +54,5 @@ export const deleteRecipe = (recipeId, token) => {
 // https://api.spoonacular.com/recipes/complexSearch?query=pasta&maxFat=25&number=2
 export const searchSpoonacularRecipes = (query) => {
   return fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${query}&apiKey=93d635e29108455ab8e88e1c60735e17`);
+  
 };
