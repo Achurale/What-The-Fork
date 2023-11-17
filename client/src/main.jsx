@@ -5,7 +5,9 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import App from './App.jsx'
 import SearchRecipes from './pages/SearchRecipes'
 import SavedRecipes from './pages/SavedRecipes'
-import About from './pages/About';
+// import CreatedRecipes from './pages/CreateRecipes'
+import About from './pages/About'
+import Profile from './pages/Profile'
 
 const router = createBrowserRouter([
   {
@@ -19,6 +21,10 @@ const router = createBrowserRouter([
       }, {
         path: '/saved',
         element: <SavedRecipes />
+      },
+      {
+        path: '/profile',
+        element: <Profile />
       },
       // {
       //   path: '/create',
