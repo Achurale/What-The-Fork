@@ -39,9 +39,15 @@ const AppNavbar = () => {
                   <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
                 </>
               ) : (
+                <>
                 <Nav.Link onClick={() => setShowModal(true)}>
                   Login/Sign Up
                 </Nav.Link>
+
+                <Nav.Link as={Link} to="/about">
+                  About
+                </Nav.Link>
+                </>
               )}
             </Nav>
           </Navbar.Collapse>
