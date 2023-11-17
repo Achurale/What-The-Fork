@@ -51,7 +51,7 @@ export const deleteRecipe = (recipeId, token) => {
 };
 
 // make a search to recipes api
-// https://www.googleapis.com/books/v1/volumes?q=harry+potter
+// https://api.spoonacular.com/recipes/complexSearch?query=pasta&maxFat=25&number=2
 export const searchSpoonacularRecipes = (query) => {
-  return fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}`);
+  return fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${query}&apiKey=93d635e29108455ab8e88e1c60735e17`);
 };
