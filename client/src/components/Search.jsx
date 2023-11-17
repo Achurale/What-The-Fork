@@ -20,8 +20,8 @@ function SearchRecipe() {
     }, []);
   }
   return (
-    <>
-        <h1>Test</h1>
-    </>
+    <div className="search">
+        <h1>What The Fork</h1>
+    </div>
   )
 }
