@@ -15,6 +15,7 @@ const AppNavbar = () => {
       <Navbar bg="dark" variant="dark" expand="lg">
         <Container fluid>
           <Navbar.Brand as={Link} to="/">
+            <img src='./public/WTF.jpeg' width="150px"></img>
             What The Fork?!
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbar" />
