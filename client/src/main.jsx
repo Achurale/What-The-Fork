@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import App from './App.jsx'
 import SearchRecipes from './pages/SearchRecipes'
 import SavedRecipes from './pages/SavedRecipes'
+import About from './pages/About';
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
       //   path: '/create',
       //   element: <CreateRecipes />
       // },
+      {
+        path: '/about',
+        element: <About />
+      }
     ]
   }
 ])

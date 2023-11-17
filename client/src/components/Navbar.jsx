@@ -15,7 +15,7 @@ const AppNavbar = () => {
       <Navbar bg="dark" variant="dark" expand="lg">
         <Container fluid>
           <Navbar.Brand as={Link} to="/">
-            <img src='./public/WTF.jpeg' width="150px"></img>
+            <img src='./WTF.jpeg' width="150px"></img>
             What The Fork?!
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbar" />
@@ -39,9 +39,15 @@ const AppNavbar = () => {
                   <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
                 </>
               ) : (
+                <>
                 <Nav.Link onClick={() => setShowModal(true)}>
                   Login/Sign Up
                 </Nav.Link>
+
+                <Nav.Link as={Link} to="/about">
+                  About
+                </Nav.Link>
+                </>
               )}
             </Nav>
           </Navbar.Collapse>
