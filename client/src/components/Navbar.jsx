@@ -15,8 +15,7 @@ const AppNavbar = () => {
       <Navbar bg="dark" variant="dark" expand="lg">
         <Container fluid>
           <Navbar.Brand as={Link} to="/">
-            <img src='./public/WTF.jpeg' width="150px"></img>
-            What The Fork?!
+          <img src='./WTF.jpeg' width="150px"></img>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbar" />
           <Navbar.Collapse id="navbar" className="d-flex flex-row-reverse">
@@ -24,7 +23,7 @@ const AppNavbar = () => {
               <Nav.Link as={Link} to="/">
                 Search Recipes
               </Nav.Link>
-              {/* if user is logged in show saved books and logout */}
+              {/* if user is logged in show saved recipes, create recipes, profile and logout */}
               {Auth.loggedIn() ? (
                 <>
                   <Nav.Link as={Link} to="/create">
