@@ -11,11 +11,11 @@ import {
 import { SAVE_RECIPE } from '../utils/mutations';
 
 import Auth from '../utils/auth';
-// import { searchGoogleBooks } from '../utils/API';
+import { searchSpoonacularRecipes } from '../utils/API';
 import { saveRecipeIds, getSavedRecipeIds } from '../utils/localStorage';
 
 const SearchRecipes = () => {
-  // create state for holding returned google api data
+  // create state for holding returned spoonacular api data
   const [searchedRecipes, setSearchedRecipes] = useState([]);
   // create state for holding our search field data
   const [searchInput, setSearchInput] = useState('');
@@ -40,7 +40,7 @@ const SearchRecipes = () => {
     }
 
     try {
-      // const response = await searchGoogleBooks(searchInput);
+      const response = await searchSpoonacularRecipes(searchInput);
 
       if (!response.ok) {
         throw new Error('something went wrong!');
