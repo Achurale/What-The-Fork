@@ -33,7 +33,7 @@ const AppNavbar = () => {
                   <Nav.Link as={Link} to="/saved">
                     Favorites
                   </Nav.Link>
-                  <Nav.Link as={Link} to="/saved">
+                  <Nav.Link as={Link} to="/profile">
                     Profile
                   </Nav.Link>
                   <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
