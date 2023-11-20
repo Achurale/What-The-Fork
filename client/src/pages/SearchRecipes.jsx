@@ -92,7 +92,7 @@ const SearchRecipes = () => {
 
   return (
     <>
-      <div className="text-light bg-dark p-5">
+      <div className="text-dark bg-light p-5">
         <Container>
           <h1>Search Recipes</h1>
           <Form onSubmit={handleFormSubmit}>
@@ -108,7 +108,7 @@ const SearchRecipes = () => {
                 />
               </Col>
               <Col xs={12} md={4}>
-                <Button type='submit' variant='success' size='lg'>
+                <Button type='submit' variant='warning' size='lg'>
                   Search
                 </Button>
               </Col>
@@ -121,7 +121,7 @@ const SearchRecipes = () => {
         <h2 className='pt-5'>
           {searchedRecipes.length
             ? `Viewing ${searchedRecipes.length} results:`
-            : 'Search for a recipe'}
+            : 'Search Results...'}
         </h2>
         <Row>
           {searchedRecipes.map((recipe) => {
