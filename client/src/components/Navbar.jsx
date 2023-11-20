@@ -15,13 +15,16 @@ const AppNavbar = () => {
       <Navbar bg="dark" variant="dark" expand="lg">
         <Container fluid>
           <Navbar.Brand as={Link} to="/">
-          <img src='./WTF.jpeg' width="150px"></img>
+            <img src='./WTF.jpeg' width="150px"></img>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbar" />
           <Navbar.Collapse id="navbar" className="d-flex flex-row-reverse">
             <Nav className="ml-auto d-flex">
               <Nav.Link as={Link} to="/">
                 Search Recipes
+              </Nav.Link>
+              <Nav.Link as={Link} to="/about">
+                About
               </Nav.Link>
               {/* if user is logged in show saved recipes, create recipes, profile and logout */}
               {Auth.loggedIn() ? (
@@ -39,13 +42,9 @@ const AppNavbar = () => {
                 </>
               ) : (
                 <>
-                <Nav.Link onClick={() => setShowModal(true)}>
-                  Login/Sign Up
-                </Nav.Link>
-
-                <Nav.Link as={Link} to="/about">
-                  About
-                </Nav.Link>
+                  <Nav.Link onClick={() => setShowModal(true)}>
+                    Login/Sign Up
+                  </Nav.Link>
                 </>
               )}
             </Nav>
