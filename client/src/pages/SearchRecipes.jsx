@@ -118,7 +118,7 @@ const SearchRecipes = () => {
       </div>
 
       <Container>
-        <h2 className='pt-5'>
+        <h2 className='pt-5 text-center'>
           {searchedRecipes.length
             ? `Viewing ${searchedRecipes.length} results:`
             : 'Search Results...'}

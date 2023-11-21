@@ -1,3 +1,9 @@
+* {
+  --red: #b2003a;
+  --yellow: #e3b23c;
+  --offWhite: #EDEBD7;
+}
+
 /* #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -43,7 +49,10 @@
 
 body {
   font-family: 'Rubik', sans-serif;
+  background-color: var(--offWhite);
 }
+
+
 
 h1,
 h2,
@@ -61,4 +70,12 @@ h6 {
 
 #navLogo {
   border-radius: 50%;
+}
+
+#navbar {
+  background-color: var(--yellow);
+}
+
+footer {
+  background-color: var(--yellow);
 }
