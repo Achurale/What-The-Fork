@@ -1,64 +1,94 @@
-import * as React from 'react';
-import Typography from '@mui/material/Typography';
-import Breadcrumbs from '@mui/material/Breadcrumbs';
-import Link from '@mui/material/Link';
-import Box from '@mui/material/Box';
-import WTF from '../assets/Whatthefork.png'
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { Navbar, Nav, Container, Modal, Tab } from "react-bootstrap";
+import SignUpForm from "./SignupForm";
+import LoginForm from "./LoginForm";
 
-export default function Nav() {
+import Auth from "../utils/auth";
+
+const AppNavbar = () => {
+  // set modal display state
+  const [showModal, setShowModal] = useState(false);
+
   return (
-    <div role="presentation" className='Navbar'>
+    <>
+      <Navbar bg="dark" variant="dark" expand="lg">
+        <Container fluid>
+          <Navbar.Brand as={Link} to="/">
 
-      <Box sx={{
-        display:'flex',
-        alignItems:'center',
-        justifyContent:'space-between'
-      }}>
+          <img src='./WTF.jpeg' width="150px"></img>
 
-      <Box sx={{
-        display:'flex',
-        alignItems:'center'}}>
+          </Navbar.Brand>
+          <Navbar.Toggle aria-controls="navbar" />
+          <Navbar.Collapse id="navbar" className="d-flex flex-row-reverse">
+            <Nav className="ml-auto d-flex">
+              <Nav.Link as={Link} to="/">
+                Search Recipes
+              </Nav.Link>
+              {/* if user is logged in show saved recipes, create recipes, profile and logout */}
+              {Auth.loggedIn() ? (
+                <>
+                  <Nav.Link as={Link} to="/create">
+                    Create Recipe
+                  </Nav.Link>
+                  <Nav.Link as={Link} to="/saved">
+                    Favorites
+                  </Nav.Link>
+                  <Nav.Link as={Link} to="/profile">
+                    Profile
+                  </Nav.Link>
+                  <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
+                </>
+              ) : (
+                <>
+                <Nav.Link onClick={() => setShowModal(true)}>
+                  Login/Sign Up
+                </Nav.Link>
 
-        <Link href='/' underline='none'>
-        <img src={WTF} alt="" id='logo'/>
-        </Link>
-        
-        <Typography variant='h2' component='h1'>
-          What the Fork?!
-        </Typography>
-
-      </Box>
-
-      <Breadcrumbs aria-label="breadcrumb"  separator=' || ' sx={{
-        justifyContent:'flex-end',
-        marginRight:'10px'
-      }}>
-        <Box>
-          <form id='Searching'>
-            <input type='text' id='searchBar' name='searchBar' placeholder='Clam Chowder'/>
-            <input type='submit' value='Search'/>
-          </form>
-        </Box> 
-
-        <Link
-          underline="hover"
-          color="inherit"
-          href="/">
-          Create Recipe
-        </Link>
-
-        <Link underline="hover"
-          color="inherit"
-          href="/Login">Login
-        </Link>
-
-          <Link underline="hover"
-          color="inherit"
-          href="/SignUp">Sign up
-        </Link>
-
-      </Breadcrumbs>
-      </Box>
-    </div>
+                <Nav.Link as={Link} to="/about">
+                  About
+                </Nav.Link>
+                </>
+              )}
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+      {/* set modal data up */}
+      <Modal
+        size="lg"
+        show={showModal}
+        onHide={() => setShowModal(false)}
+        aria-labelledby="signup-modal"
+      >
+        {/* tab container to do either signup or login component */}
+        <Tab.Container defaultActiveKey="login">
+          <Modal.Header closeButton>
+            <Modal.Title id="signup-modal">
+              <Nav variant="pills">
+                <Nav.Item>
+                  <Nav.Link eventKey="login">Login</Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link eventKey="signup">Sign Up</Nav.Link>
+                </Nav.Item>
+              </Nav>
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Tab.Content>
+              <Tab.Pane eventKey="login">
+                <LoginForm handleModalClose={() => setShowModal(false)} />
+              </Tab.Pane>
+              <Tab.Pane eventKey="signup">
+                <SignUpForm handleModalClose={() => setShowModal(false)} />
+              </Tab.Pane>
+            </Tab.Content>
+          </Modal.Body>
+        </Tab.Container>
+      </Modal>
+    </>
   );
-}
+};
+
+export default AppNavbar;
