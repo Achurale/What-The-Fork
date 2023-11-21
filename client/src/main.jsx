@@ -10,6 +10,8 @@ import CreateRecipes from './pages/CreateRecipes.jsx'
 import Profile from './pages/Profile.jsx'
 
 import About from './pages/About';
+import CreateRecipes from './pages/CreateRecipes.jsx'
+import Profile from './pages/Profile.jsx'
 
 const router = createBrowserRouter([
   {
@@ -28,11 +30,14 @@ const router = createBrowserRouter([
         path: '/create',
         element: <CreateRecipes />
       },
-        {
+      {
         path: '/profile',
         element: <Profile />
       },
-
+      {
+        path: '/about',
+        element: <About />
+      },
     ]
   }
 ])

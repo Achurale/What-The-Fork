@@ -38,7 +38,7 @@ const SavedRecipes = () => {
 
   return (
     <>
-      <div fluid className="text-light bg-dark p-5">
+      <div fluid className="text-dark bg-light p-5">
         <Container>
           <h1>Viewing favorite recipes!</h1>
         </Container>
