@@ -12,8 +12,12 @@
   },
   "dependencies": {
     "@apollo/client": "^3.7.14",
-    "graphql": "^16.6.0",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.14.18",
+    "@mui/material": "^5.14.18",
     "bootstrap": "^5.2.3",
+    "graphql": "^16.6.0",
     "jwt-decode": "^3.1.2",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.4",
