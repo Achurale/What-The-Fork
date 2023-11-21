@@ -17,6 +17,9 @@ const AppNavbar = () => {
           <Navbar.Brand as={Link} to="/">
             <img src='./Whatthefork.png' width="150px"></img>
           </Navbar.Brand>
+
+          <h1>What the Fork?</h1>
+
           <Navbar.Toggle aria-controls="navbar" />
           <Navbar.Collapse id="navbar" className="d-flex flex-row-reverse">
             <Nav className="ml-auto d-flex">
