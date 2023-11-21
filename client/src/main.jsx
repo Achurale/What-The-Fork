@@ -10,8 +10,6 @@ import CreateRecipes from './pages/CreateRecipes.jsx'
 import Profile from './pages/Profile.jsx'
 
 import About from './pages/About';
-import CreateRecipes from './pages/CreateRecipes.jsx'
-import Profile from './pages/Profile.jsx'
 
 const router = createBrowserRouter([
   {
