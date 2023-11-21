@@ -55,13 +55,14 @@ const CreateRecipes = () => {
     <>
       <div fluid className="text-dark bg-light p-5 mb-4">
         <Container>
-          <h1>Create your Recipe</h1>
+          <h1 className='text-center'>Create your Recipe</h1>
         </Container>
       </div>
+
       <Container>
         <Row>
           <Col>
-            <Form>
+            <Form className='w-75 mx-auto'>
               <Form.Group className="mb-4" controlId="title">
                 <Form.Label>Title</Form.Label>
                 <Form.Control type="text" placeholder="Title" />
@@ -91,6 +92,7 @@ const CreateRecipes = () => {
           </Col>
         </Row>
       </Container>
+
     </>
   );
 };
