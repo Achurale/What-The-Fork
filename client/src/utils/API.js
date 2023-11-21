@@ -53,6 +53,9 @@ export const deleteRecipe = (recipeId, token) => {
 // make a search to recipes api
 // https://api.spoonacular.com/recipes/complexSearch?query=pasta&maxFat=25&number=2
 export const searchSpoonacularRecipes = (query) => {
-  return fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${query}&apiKey=93d635e29108455ab8e88e1c60735e17`);
+  const API_KEY = import.meta.env.VITE_REACT_APP_API_KEY;
+  return fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${query}&apiKey=${API_KEY}`);
+
   
+
 };
