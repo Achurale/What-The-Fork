@@ -84,7 +84,7 @@
 
 // module.exports = resolvers;
 
-const { User, Book } = require('../models');
+const { User, Profile } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {

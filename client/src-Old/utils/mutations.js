@@ -26,7 +26,7 @@ export const ADD_USER = gql`
 
 export const SAVE_RECIPE = gql`
   mutation saveRecipe($authors: [String], $description: String!, $title: String!, $recipeId: ID!, $image: String!) {
-    saveRecipe(authors: $authors, description: $description, title: $title, bookId: $bookId, image: $image) {
+    saveRecipe(authors: $authors, description: $description, title: $title, recipeId: $recipeId, image: $image) {
         _id
         username
         email
@@ -59,3 +59,21 @@ export const REMOVE_RECIPE = gql`
     }
   }
 `;
+
+// export const ADD_RECIPE = gql`
+//   mutation addRecipe($authors: [String], $description: String!, $title: String!, $recipeId: ID!, $image: String!) {
+//     addRecipe(authors: $authors, description: $description, title: $title, recipeId: $recipeId, image: $image) {
+//         _id
+//         username
+//         email
+//         recipeCount
+//         savedRecipes {
+//             recipeId
+//             authors
+//             description
+//             title
+//             image
+//         }
+//     }
+//   }
+// `;
