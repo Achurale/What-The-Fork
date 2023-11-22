@@ -46,14 +46,18 @@ const SearchRecipes = () => {
         throw new Error('something went wrong!');
       }
 
-      const { items } = await response.json();
+      const data = await response.json();
+      const items = data.results
+
+      console.log('Data: ', data)
+      console.log('Items: ', items)
 
       const recipeData = items.map((recipe) => ({
         recipeId: recipe.id,
-        authors: recipe.volumeInfo.authors || ['No author to display'],
-        title: recipe.volumeInfo.title,
-        description: recipe.volumeInfo.description,
-        image: recipe.volumeInfo.imageLinks?.thumbnail || '',
+        authors: recipe.authors || ['No author to display'],
+        title: recipe.title,
+        description: recipe.summary,
+        image: recipe.image || '',
       }));
 
       setSearchedRecipes(recipeData);
