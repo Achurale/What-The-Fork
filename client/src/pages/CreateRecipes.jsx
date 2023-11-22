@@ -26,7 +26,7 @@ const CreateRecipes = () => {
   const handleDeleteIngredient = (ingredient, inputKey) => {
     console.log(ingredient);
     console.log(inputKey);
-    // TODO: remove ingredient from specified index from formData.ingredients
+    // TODO: remove ingredient from specified index from formData.ingredients 
   };
 
   const Inputs = ({ count }) =>
@@ -36,7 +36,8 @@ const CreateRecipes = () => {
           placeholder="Ingredient"
           aria-label="Ingredient"
           name={`formData.ingredients[${index}]`}
-          value={formData.ingredients[index]}
+          defaultValue={""}
+          // value={formData.ingredients[index]}
           onChange={handleInputChange}
         />
         <Button
