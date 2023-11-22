@@ -9,6 +9,7 @@ import {
   Row
 } from 'react-bootstrap';
 import { SAVE_RECIPE } from '../utils/mutations';
+import {Link} from 'react-router-dom'
 
 import Auth from '../utils/auth';
 import { searchSpoonacularRecipes } from '../utils/API';
@@ -54,7 +55,8 @@ const SearchRecipes = () => {
 
       const recipeData = items.map((recipe) => ({
         recipeId: recipe.id,
-        authors: recipe.authors || ['No author to display'],
+        source: recipe.sourceName || ['No source to display'],
+        sourceUrl: recipe.sourceUrl,
         title: recipe.title,
         description: recipe.summary,
         image: recipe.image || '',
@@ -132,12 +134,14 @@ const SearchRecipes = () => {
             return (
               <Col md="4" key={recipe.recipeId}>
                 <Card border='dark'>
-                  {recipe.image ? (
-                    <Card.Img src={recipe.image} alt={`The image for ${recipe.title}`} variant='top' />
-                  ) : null}
+                  <Link as={Link} to={`/recipe/${recipe.recipeId}`}>
+                    {recipe.image ? (
+                      <Card.Img src={recipe.image} alt={`The image for ${recipe.title}`} variant='top' />
+                    ) : null}
+                  </Link>
                   <Card.Body>
                     <Card.Title>{recipe.title}</Card.Title>
-                    <p className='small'>Authors: {recipe.authors}</p>
+                    <p className='small'>Source: <a href={`${recipe.sourceUrl}`} target="_blank" rel="noopener noreferrer"> {recipe.source} </a></p>
                     <Card.Text>{recipe.description}</Card.Text>
                     {Auth.loggedIn() && (
                       <Button
