@@ -98,7 +98,7 @@ const SearchRecipes = () => {
 
   return (
     <>
-      <div className="text-dark bg-light p-5">
+      <div className="text-dark bg-light p-5 text-center">
         <Container>
           <h1>Search Recipes</h1>
           <Form onSubmit={handleFormSubmit}>
@@ -133,7 +133,7 @@ const SearchRecipes = () => {
           {searchedRecipes.map((recipe) => {
             return (
               <Col md="4" key={recipe.recipeId}>
-                <Card border='dark'>
+                <Card class="card" border='dark'>
                   <Link as={Link} to={`/recipe/${recipe.recipeId}`}>
                     {recipe.image ? (
                       <Card.Img src={recipe.image} alt={`The image for ${recipe.title}`} variant='top' />
