@@ -33,18 +33,19 @@ const SavedRecipes = () => {
 
   // if data isn't here yet, say so
   if (loading) {
-    return <h2>LOADING...</h2>;
+    return <h2 className='text-center'>LOADING...</h2>;
   }
 
   return (
     <>
       <div fluid className="text-dark bg-light p-5">
-        <Container>
+        <Container className='text-center'>
           <h1>Viewing favorite recipes!</h1>
         </Container>
       </div>
+
       <Container>
-        <h2 className="pt-5">
+        <h2 className="pt-5 text-center">
           {userData.savedRecipes.length
             ? `Viewing ${userData.savedRecipes.length} saved ${
                 userData.savedRecipes.length === 1 ? "recipe" : "recipes"

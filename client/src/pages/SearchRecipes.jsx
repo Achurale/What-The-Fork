@@ -9,6 +9,7 @@ import {
   Row
 } from 'react-bootstrap';
 import { SAVE_RECIPE } from '../utils/mutations';
+import {Link} from 'react-router-dom'
 
 import Auth from '../utils/auth';
 import { searchSpoonacularRecipes } from '../utils/API';
@@ -46,14 +47,19 @@ const SearchRecipes = () => {
         throw new Error('something went wrong!');
       }
 
-      const { items } = await response.json();
+      const data = await response.json();
+      const items = data.results
+
+      console.log('Data: ', data)
+      console.log('Items: ', items)
 
       const recipeData = items.map((recipe) => ({
         recipeId: recipe.id,
-        authors: recipe.volumeInfo.authors || ['No author to display'],
-        title: recipe.volumeInfo.title,
-        description: recipe.volumeInfo.description,
-        image: recipe.volumeInfo.imageLinks?.thumbnail || '',
+        source: recipe.sourceName || ['No source to display'],
+        sourceUrl: recipe.sourceUrl,
+        title: recipe.title,
+        description: recipe.summary,
+        image: recipe.image || '',
       }));
 
       setSearchedRecipes(recipeData);
@@ -118,7 +124,7 @@ const SearchRecipes = () => {
       </div>
 
       <Container>
-        <h2 className='pt-5'>
+        <h2 className='pt-5 text-center'>
           {searchedRecipes.length
             ? `Viewing ${searchedRecipes.length} results:`
             : 'Search Results...'}
@@ -128,12 +134,14 @@ const SearchRecipes = () => {
             return (
               <Col md="4" key={recipe.recipeId}>
                 <Card border='dark'>
-                  {recipe.image ? (
-                    <Card.Img src={recipe.image} alt={`The image for ${recipe.title}`} variant='top' />
-                  ) : null}
+                  <Link as={Link} to={`/recipe/${recipe.recipeId}`}>
+                    {recipe.image ? (
+                      <Card.Img src={recipe.image} alt={`The image for ${recipe.title}`} variant='top' />
+                    ) : null}
+                  </Link>
                   <Card.Body>
                     <Card.Title>{recipe.title}</Card.Title>
-                    <p className='small'>Authors: {recipe.authors}</p>
+                    <p className='small'>Source: <a href={`${recipe.sourceUrl}`} target="_blank" rel="noopener noreferrer"> {recipe.source} </a></p>
                     <Card.Text>{recipe.description}</Card.Text>
                     {Auth.loggedIn() && (
                       <Button
