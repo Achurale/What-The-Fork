@@ -12,7 +12,7 @@ export default function About(){
 
             <div className='m-2 w-25 mx-auto'>
                 <p>This is a team consists of 4 developers: </p>
-                <ul>
+                <ul className='list-unstyled'>
                     <li>
                         Gabe Velasquez<a href="https://github.com/Gabe-Velasquez">
                         <FontAwesomeIcon icon={faGithub} />
