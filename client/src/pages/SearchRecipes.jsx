@@ -140,8 +140,8 @@ const SearchRecipes = () => {
                     ) : null}
                   </Link>
                   <Card.Body>
-                    <Card.Title>{recipe.title}</Card.Title>
-                    <p className='small'>Source: <a href={`${recipe.sourceUrl}`} target="_blank" rel="noopener noreferrer"> {recipe.source} </a></p>
+                    <Card.Title className='text-center'>{recipe.title}</Card.Title>
+                    <p className='small text-center'>Source: <a href={`${recipe.sourceUrl}`} target="_blank" rel="noopener noreferrer"> {recipe.source} </a></p>
                     <Card.Text dangerouslySetInnerHTML={{ __html: recipe.description}}></Card.Text>
                     {Auth.loggedIn() && (
                       <Button
