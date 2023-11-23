@@ -142,7 +142,7 @@ const SearchRecipes = () => {
                   <Card.Body>
                     <Card.Title>{recipe.title}</Card.Title>
                     <p className='small'>Source: <a href={`${recipe.sourceUrl}`} target="_blank" rel="noopener noreferrer"> {recipe.source} </a></p>
-                    <Card.Text>{recipe.description}</Card.Text>
+                    <Card.Text dangerouslySetInnerHTML={{ __html: recipe.description}}></Card.Text>
                     {Auth.loggedIn() && (
                       <Button
                         disabled={savedRecipeIds?.some((savedRecipeId) => savedRecipeId === recipe.recipeId)}
