@@ -13,7 +13,7 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
-    errorElement: <h1 className='display-2 text-center'>Wrong page!</h1>,
+    errorElement: <div><img className='nfound' src='./404.jpeg'></img><h1 className='display-2 text-center'>Wrong page!</h1></div>,
     children: [
       {
         index: true,

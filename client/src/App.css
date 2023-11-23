@@ -3,6 +3,18 @@
   --yellow: #e3b23c;
   --offWhite: #EDEBD7;
 }
+.nfound{
+ display: block;
+ margin-left:auto;
+ margin-right:auto;
+ margin-top: 50px;
+ margin-bottom: 20px;
+  border-radius: 30%;
+  transition: transform .8s ease-in;
+}
+.nfound:hover{
+  transform: rotate(360deg);
+}
 
 /* #root {
   max-width: 1280px;
