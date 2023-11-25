@@ -9,18 +9,19 @@ import Auth from "../utils/auth";
 const CreateRecipes = () => {
   const [formData, setFormData] = useState({
     title: "",
-    ingredients: ["", "", ""],
+    ingredients: ["", "", "", "", ""],
     directions: "",
   });
 
-  const [inputGroup, setInputGroup] = useState(3);
+  const [inputGroup, setInputGroup] = useState(5);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
   };
 
-  const handleAddIngredient = () => {
+  const handleAddIngredient = (e) => {
     setFormData({ ...formData, ingredients: [...formData.ingredients, ""] });
+    // TODO: Function deletes previous inputs and replaces with new input groups
   };
 
   const handleDeleteIngredient = (ingredient, inputKey) => {
@@ -30,6 +31,7 @@ const CreateRecipes = () => {
   };
 
   const Inputs = ({ count }) =>
+  
     formData.ingredients.map((_item, index) => (
       <InputGroup className="mb-4" key={index}>
         <Form.Control
@@ -88,6 +90,7 @@ const CreateRecipes = () => {
                 size="lg"
               >
                 Create Recipe
+                {/* Use submit button to send information to profile page with a card of the given recipe */}
               </Button>
             </Form>
           </Col>
