@@ -2,7 +2,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import { Container, Row, Col, Form, Button, InputGroup } from "react-bootstrap";
 import { useState } from "react";
 
-// import { ADD_RECIPE } from "../utils/mutations";
+import { ADD_RECIPE } from "../utils/mutations";
 
 import Auth from "../utils/auth";
 

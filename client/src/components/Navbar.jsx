@@ -12,17 +12,17 @@ const AppNavbar = () => {
 
   return (
     <>
-      <Navbar expand="lg" id='navbar'>
+      <Navbar expand="lg" id="navbar">
         <Container fluid>
           <Navbar.Brand as={Link} to="/">
-            <img src='./Whatthefork.png' width="150px"></img>
+            <img src='./Whatthefork.png' width="150px" alt="WhatTheFork Logo"></img>
           </Navbar.Brand>
 
           <h1>What the Fork?</h1>
 
-          <Navbar.Toggle aria-controls="navbar" />
-          <Navbar.Collapse id="navbar" className="d-flex flex-row-reverse">
-            <Nav className="ml-auto d-flex">
+          <Navbar.Toggle aria-controls="navbar" aria-expanded="false"/>
+          <Navbar.Collapse id="navbar" >
+            <Nav className="d-flex justify-content-end">
               <Nav.Link as={Link} to="/">
                 Search Recipes
               </Nav.Link>
@@ -41,6 +41,7 @@ const AppNavbar = () => {
                   <Nav.Link as={Link} to="/profile">
                     Profile
                   </Nav.Link>
+                  
                   <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
                 </>
               ) : (
