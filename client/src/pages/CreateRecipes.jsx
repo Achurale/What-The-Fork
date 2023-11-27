@@ -5,7 +5,30 @@ import { useState } from "react";
 import { ADD_RECIPE } from "../utils/mutations";
 
 import Auth from "../utils/auth";
-
+  const Inputs = ({ formData, handleInputChange, handleDeleteIngredient }) =>{
+  
+   return formData.ingredients.map((_item, index) => (
+      <InputGroup className="mb-4" key={index}>
+        <Form.Control
+          placeholder="Ingredient"
+          aria-label="Ingredient"
+          name={index}
+          // defaultValue={""}
+          value={formData.ingredients[index]}
+          onChange={(e)=>handleInputChange(e,index)}
+        />
+        <Button
+          variant="danger"
+          id=""
+          onClick={() =>
+            handleDeleteIngredient(_item, index)
+          }
+        >
+          Delete
+        </Button>
+      </InputGroup>
+    ));
+  }
 const CreateRecipes = () => {
   const [formData, setFormData] = useState({
     title: "",
@@ -13,10 +36,14 @@ const CreateRecipes = () => {
     directions: "",
   });
 
-  const [inputGroup, setInputGroup] = useState(5);
+  // const [inputGroup, setInputGroup] = useState(5);
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
+  const handleInputChange = (e, index) => {
+    const { value } = e.target;
+    console.log( value, index)
+    const ingredients = formData.ingredients
+    ingredients[index] = value
+    setFormData({ ...formData, ingredients })
   };
 
   const handleAddIngredient = (e) => {
@@ -27,32 +54,12 @@ const CreateRecipes = () => {
   const handleDeleteIngredient = (ingredient, inputKey) => {
     console.log(ingredient);
     console.log(inputKey);
+    const updatedIngredients = formData.ingredients.filter((item,i)=> i !== inputKey)
+    setFormData({ ...formData, ingredients: updatedIngredients });
     // TODO: remove ingredient from specified index from formData.ingredients 
   };
 
-  const Inputs = ({ count }) =>
-  
-    formData.ingredients.map((_item, index) => (
-      <InputGroup className="mb-4" key={index}>
-        <Form.Control
-          placeholder="Ingredient"
-          aria-label="Ingredient"
-          name={`formData.ingredients[${index}]`}
-          defaultValue={""}
-          // value={formData.ingredients[index]}
-          onChange={handleInputChange}
-        />
-        <Button
-          variant="danger"
-          id=""
-          onClick={() =>
-            handleDeleteIngredient(formData.ingredients[index], index)
-          }
-        >
-          Delete
-        </Button>
-      </InputGroup>
-    ));
+
 
   return (
     <>
@@ -71,7 +78,7 @@ const CreateRecipes = () => {
                 <Form.Control type="text" placeholder="Title" />
               </Form.Group>
               <Form.Label>Ingredients</Form.Label>
-              <Inputs count={inputGroup} />
+              <Inputs formData={formData} handleInputChange={handleInputChange} handleDeleteIngredient={handleDeleteIngredient}/>
               <Button
                 variant="secondary"
                 className="mb-4 w-100"
