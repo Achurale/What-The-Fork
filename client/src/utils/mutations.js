@@ -60,20 +60,20 @@ export const REMOVE_RECIPE = gql`
   }
 `;
 
-// export const ADD_RECIPE = gql`
-//   mutation addRecipe($authors: [String], $description: String!, $title: String!, $recipeId: ID!, $image: String!) {
-//     addRecipe(authors: $authors, description: $description, title: $title, recipeId: $recipeId, image: $image) {
-//         _id
-//         username
-//         email
-//         recipeCount
-//         savedRecipes {
-//             recipeId
-//             authors
-//             description
-//             title
-//             image
-//         }
-//     }
-//   }
-// `;
+export const ADD_RECIPE = gql`
+  mutation addRecipe($authors: [String], $description: String!, $title: String!, $recipeId: ID!, $image: String!) {
+    addRecipe(authors: $authors, description: $description, title: $title, recipeId: $recipeId, image: $image) {
+        _id
+        username
+        email
+        recipeCount
+        savedRecipes {
+            recipeId
+            authors
+            description
+            title
+            image
+        }
+    }
+  }
+`;

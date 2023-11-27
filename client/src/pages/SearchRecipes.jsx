@@ -98,7 +98,7 @@ const SearchRecipes = () => {
 
   return (
     <>
-      <div className="text-dark bg-light p-5">
+      <div className="text-dark bg-light p-5 text-center">
         <Container>
           <h1>Search Recipes</h1>
           <Form onSubmit={handleFormSubmit}>
@@ -133,16 +133,16 @@ const SearchRecipes = () => {
           {searchedRecipes.map((recipe) => {
             return (
               <Col md="4" key={recipe.recipeId}>
-                <Card border='dark'>
+                <Card class="card" border='dark'>
                   <Link as={Link} to={`/recipe/${recipe.recipeId}`}>
                     {recipe.image ? (
                       <Card.Img src={recipe.image} alt={`The image for ${recipe.title}`} variant='top' />
                     ) : null}
                   </Link>
                   <Card.Body>
-                    <Card.Title>{recipe.title}</Card.Title>
-                    <p className='small'>Source: <a href={`${recipe.sourceUrl}`} target="_blank" rel="noopener noreferrer"> {recipe.source} </a></p>
-                    <Card.Text>{recipe.description}</Card.Text>
+                    <Card.Title className='text-center'>{recipe.title}</Card.Title>
+                    <p className='small text-center'>Source: <a href={`${recipe.sourceUrl}`} target="_blank" rel="noopener noreferrer"> {recipe.source} </a></p>
+                    <Card.Text dangerouslySetInnerHTML={{ __html: recipe.description}}></Card.Text>
                     {Auth.loggedIn() && (
                       <Button
                         disabled={savedRecipeIds?.some((savedRecipeId) => savedRecipeId === recipe.recipeId)}

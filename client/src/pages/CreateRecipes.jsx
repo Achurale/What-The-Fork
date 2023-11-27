@@ -2,54 +2,64 @@ import { useMutation, useQuery } from "@apollo/client";
 import { Container, Row, Col, Form, Button, InputGroup } from "react-bootstrap";
 import { useState } from "react";
 
-// import { ADD_RECIPE } from "../utils/mutations";
+import { ADD_RECIPE } from "../utils/mutations";
 
 import Auth from "../utils/auth";
-
-const CreateRecipes = () => {
-  const [formData, setFormData] = useState({
-    title: "",
-    ingredients: ["", "", ""],
-    directions: "",
-  });
-
-  const [inputGroup, setInputGroup] = useState(3);
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-  };
-
-  const handleAddIngredient = () => {
-    setFormData({ ...formData, ingredients: [...formData.ingredients, ""] });
-  };
-
-  const handleDeleteIngredient = (ingredient, inputKey) => {
-    console.log(ingredient);
-    console.log(inputKey);
-    // TODO: remove ingredient from specified index from formData.ingredients
-  };
-
-  const Inputs = ({ count }) =>
-    formData.ingredients.map((_item, index) => (
+  const Inputs = ({ formData, handleInputChange, handleDeleteIngredient }) =>{
+  
+   return formData.ingredients.map((_item, index) => (
       <InputGroup className="mb-4" key={index}>
         <Form.Control
           placeholder="Ingredient"
           aria-label="Ingredient"
-          name={`formData.ingredients[${index}]`}
+          name={index}
+          // defaultValue={""}
           value={formData.ingredients[index]}
-          onChange={handleInputChange}
+          onChange={(e)=>handleInputChange(e,index)}
         />
         <Button
           variant="danger"
           id=""
           onClick={() =>
-            handleDeleteIngredient(formData.ingredients[index], index)
+            handleDeleteIngredient(_item, index)
           }
         >
           Delete
         </Button>
       </InputGroup>
     ));
+  }
+const CreateRecipes = () => {
+  const [formData, setFormData] = useState({
+    title: "",
+    ingredients: ["", "", "", "", ""],
+    directions: "",
+  });
+
+  // const [inputGroup, setInputGroup] = useState(5);
+
+  const handleInputChange = (e, index) => {
+    const { value } = e.target;
+    console.log( value, index)
+    const ingredients = formData.ingredients
+    ingredients[index] = value
+    setFormData({ ...formData, ingredients })
+  };
+
+  const handleAddIngredient = (e) => {
+    setFormData({ ...formData, ingredients: [...formData.ingredients, ""] });
+    // TODO: Function deletes previous inputs and replaces with new input groups
+  };
+
+  const handleDeleteIngredient = (ingredient, inputKey) => {
+    console.log(ingredient);
+    console.log(inputKey);
+    const updatedIngredients = formData.ingredients.filter((item,i)=> i !== inputKey)
+    setFormData({ ...formData, ingredients: updatedIngredients });
+    // TODO: remove ingredient from specified index from formData.ingredients 
+  };
+
+
 
   return (
     <>
@@ -68,7 +78,7 @@ const CreateRecipes = () => {
                 <Form.Control type="text" placeholder="Title" />
               </Form.Group>
               <Form.Label>Ingredients</Form.Label>
-              <Inputs count={inputGroup} />
+              <Inputs formData={formData} handleInputChange={handleInputChange} handleDeleteIngredient={handleDeleteIngredient}/>
               <Button
                 variant="secondary"
                 className="mb-4 w-100"
@@ -87,6 +97,7 @@ const CreateRecipes = () => {
                 size="lg"
               >
                 Create Recipe
+                {/* Use submit button to send information to profile page with a card of the given recipe */}
               </Button>
             </Form>
           </Col>

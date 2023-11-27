@@ -3,6 +3,18 @@
   --yellow: #e3b23c;
   --offWhite: #EDEBD7;
 }
+.nfound{
+ display: block;
+ margin-left:auto;
+ margin-right:auto;
+ margin-top: 50px;
+ margin-bottom: 20px;
+  border-radius: 30%;
+  transition: transform .8s ease-in;
+}
+.nfound:hover{
+  transform: rotate(360deg);
+}
 
 /* #root {
   max-width: 1280px;
@@ -33,11 +45,6 @@
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
 
 .card {
   padding: 2em;
@@ -79,3 +86,16 @@ h6 {
 footer {
   background-color: var(--yellow);
 }
+
+@media only screen and (max-width: 1000px) {
+  #navbar{
+    text-align: center;
+  }
+  
+}
+
+/* @media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+} */
