@@ -104,21 +104,25 @@ const resolvers = {
       return { token, user };
     },
     login: async (parent, { email, password }) => {
-      const user = await User.findOne({ email });
+      try {
+        const user = await User.findOne({ email });
 
-      if (!user) {
-        throw AuthenticationError;
+        if (!user) {
+          throw AuthenticationError;
+        }
+  
+        const correctPw = await user.isCorrectPassword(password);
+  
+        if (!correctPw) {
+          throw AuthenticationError;
+        }
+  
+        const token = signToken(user);
+  
+        return { token, user };
+      } catch(err) {
+        console.log(err)
       }
-
-      const correctPw = await user.isCorrectPassword(password);
-
-      if (!correctPw) {
-        throw AuthenticationError;
-      }
-
-      const token = signToken(user);
-
-      return { token, user };
     },
 
     saveRecipe: async (parent, recipe, context) => {
