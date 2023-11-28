@@ -9,7 +9,7 @@ import { GET_ME } from '../utils/queries';
 import Auth from '../utils/auth';
 
 const Profile = () => {
-//   const { profileId } = useParams();
+  const { profileId } = useParams();
 
   // If there is no `profileId` in the URL as a parameter, execute the `QUERY_ME` query instead for the logged in user's information
   const { loading, data } = useQuery(
@@ -28,12 +28,12 @@ const Profile = () => {
   }
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <h2 className='text-center'>Loading...</h2>;
   }
 
   if (!profile?.name) {
     return (
-      <h4>
+      <h4 className='text-center align-middle'>
         You need to be logged in to see your profile page. Use the navigation
         links above to sign up or log in!
       </h4>

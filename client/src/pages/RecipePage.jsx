@@ -40,7 +40,7 @@ const RecipePage = () => {
                 <Col md={6}>
                   <Card.Body>
                     <Card.Title>{recipeData.title}</Card.Title>
-                    <Card.Text>{recipeData.summary}</Card.Text>
+                    <Card.Text dangerouslySetInnerHTML={{ __html: recipeData.summary}}></Card.Text>
                   </Card.Body>
                 </Col>
                 <Col md={6}>
