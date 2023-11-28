@@ -13,3 +13,16 @@ query me {
       }
 `;
 
+export const QUERY_SINGLE_PROFILE = gql`
+query user {
+  recipeCount
+  savedRecipes {
+    recipeId
+    authors
+    description
+    title
+    image
+  }
+}
+
+`

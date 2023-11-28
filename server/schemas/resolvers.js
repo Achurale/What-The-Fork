@@ -108,33 +108,32 @@ const resolvers = {
         const user = await User.findOne({ email });
 
         if (!user) {
-          throw AuthenticationError;
+          throw new AuthenticationError('Incorrect email or password');
         }
   
         const correctPw = await user.isCorrectPassword(password);
   
         if (!correctPw) {
-          throw AuthenticationError;
+          throw new AuthenticationError('Incorrect email or password');
         }
   
         const token = signToken(user);
   
         return { token, user };
       } catch(err) {
-        console.log(err)
+        throw new AuthenticationError('An error occurred while attempting to log in')
       }
     },
 
     saveRecipe: async (parent, recipe, context) => {
       if (context.user) {
         return User.findOneAndUpdate(
-          { _id: context.user._id },
+        { _id: context.user._id },
         { $addToSet: { savedRecipes: recipe } },
         { new: true, runValidators: true }
         );
       }
-      throw AuthenticationError;
-      ('You need to be logged in!');
+      throw new AuthenticationError('You need to be logged in!');
     },
 
     removeRecipe: async (parent, { recipeId }, context) => {
@@ -145,7 +144,7 @@ const resolvers = {
           { new: true }
         );
       }
-      throw AuthenticationError;
+      throw new AuthenticationError('You need to be logged in!');
     },
   },
 };

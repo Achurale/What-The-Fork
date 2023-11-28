@@ -31,6 +31,10 @@ const router = createBrowserRouter([
         element: <CreateRecipes />
       },
       {
+        path: '/profile/:profileId',
+        element: <Profile />
+      },
+      {
         path: '/profile',
         element: <Profile />
       },
