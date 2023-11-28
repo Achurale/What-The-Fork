@@ -6,11 +6,18 @@ import { REMOVE_RECIPE } from "../utils/mutations";
 import { removeRecipeId } from "../utils/localStorage";
 
 import Auth from "../utils/auth";
+import { useEffect } from "react";
 
 const SavedRecipes = () => {
   const { loading, data } = useQuery(GET_ME);
   const [removeRecipe, { error }] = useMutation(REMOVE_RECIPE);
   const userData = data?.me || {};
+
+useEffect(() => {
+  console.log("loading", loading)
+  console.log("data", data);
+  console.log("userData", userData);
+}, [data]);
 
   // create function that accepts the recipe's mongo _id value as param and deletes the recipe from the database
   const handleDeleteRecipe = async (recipeId) => {
@@ -46,14 +53,14 @@ const SavedRecipes = () => {
 
       <Container>
         <h2 className="pt-5 text-center">
-          {userData.savedRecipes.length
+          {userData.savedRecipes?.length
             ? `Viewing ${userData.savedRecipes.length} saved ${
                 userData.savedRecipes.length === 1 ? "recipe" : "recipes"
               }:`
             : "You have no saved recipes!"}
         </h2>
         <Row>
-          {userData.savedRecipes.map((recipe) => {
+          {userData.savedRecipes?.map((recipe) => {
             return (
               <Col md="4" key={recipe.recipeId}>
                 <Card key={recipe.recipeId} border="dark">
