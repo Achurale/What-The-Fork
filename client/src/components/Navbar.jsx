@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Navbar, Nav, Container, Modal, Tab } from "react-bootstrap";
 import SignUpForm from "./SignupForm";
@@ -9,6 +9,15 @@ import Auth from "../utils/auth";
 const AppNavbar = () => {
   // set modal display state
   const [showModal, setShowModal] = useState(false);
+  const [userId, setUserId] = useState(null)
+
+  useEffect(() => {
+    if (Auth.loggedIn()) {
+      setUserId(Auth.getProfile().data._id)
+    } else {
+      setUserId(null)
+    }
+  }, [Auth.loggedIn()])
 
   return (
     <>
@@ -38,9 +47,10 @@ const AppNavbar = () => {
                   <Nav.Link as={Link} to="/saved">
                     Favorites
                   </Nav.Link>
-                  <Nav.Link as={Link} to="/profile">
+                  <Nav.Link as={Link} to={`/profile/${userId}`}>
                     Profile
                   </Nav.Link>
+
                   
                   <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
                 </>
