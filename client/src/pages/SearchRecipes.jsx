@@ -1,26 +1,19 @@
-import { useState, useEffect } from 'react';
-import { useMutation } from '@apollo/client';
-import {
-  Container,
-  Col,
-  Form,
-  Button,
-  Card,
-  Row
-} from 'react-bootstrap';
-import { SAVE_RECIPE } from '../utils/mutations';
-import {Link} from 'react-router-dom'
+import { useState, useEffect } from "react";
+import { useMutation } from "@apollo/client";
+import { Container, Col, Form, Button, Card, Row } from "react-bootstrap";
+import { SAVE_RECIPE } from "../utils/mutations";
+import { Link } from "react-router-dom";
 
-import Auth from '../utils/auth';
-import { searchSpoonacularRecipes } from '../utils/API';
-import { saveRecipeIds, getSavedRecipeIds } from '../utils/localStorage';
+import Auth from "../utils/auth";
+import { searchSpoonacularRecipes } from "../utils/API";
+import { saveRecipeIds, getSavedRecipeIds } from "../utils/localStorage";
 
 const SearchRecipes = () => {
   const [customRecipes, setCustomRecipes] = useState([]);
   // create state for holding returned spoonacular api data
   const [searchedRecipes, setSearchedRecipes] = useState([]);
   // create state for holding our search field data
-  const [searchInput, setSearchInput] = useState('');
+  const [searchInput, setSearchInput] = useState("");
 
   const [saveRecipe, { error }] = useMutation(SAVE_RECIPE);
 
@@ -42,45 +35,43 @@ const SearchRecipes = () => {
     }
 
     try {
-
       const customResponse = await localStorage.getItem(searchInput);
 
       const response = await searchSpoonacularRecipes(searchInput);
 
       if (!response.ok) {
-        throw new Error('something went wrong!');
+        throw new Error("something went wrong!");
       }
-     
-        
-      const itemsCustom = customResponse
 
-      console.log('Items: ', itemsCustom)
+      const itemsCustom = customResponse;
+
+      console.log("Items: ", itemsCustom);
       if (itemsCustom) {
         const customRecipeData = itemsCustom.map((recipe) => ({
           recipeId: recipe.id,
-          source: recipe.sourceName || ['No source to display'],
+          source: recipe.sourceName || ["No source to display"],
           title: recipe.title,
           description: recipe.summary,
         }));
         setCustomRecipes(customRecipeData);
       }
       const data = await response.json();
-      const items = data.results
+      const items = data.results;
 
-      console.log('Data: ', data)
-      console.log('Items: ', items)
+      console.log("Data: ", data);
+      console.log("Items: ", items);
 
       const recipeData = items.map((recipe) => ({
         recipeId: recipe.id,
-        source: recipe.sourceName || ['No source to display'],
+        source: recipe.sourceName || ["No source to display"],
         sourceUrl: recipe.sourceUrl,
         title: recipe.title,
         description: recipe.summary,
-        image: recipe.image || '',
+        image: recipe.image || "",
       }));
 
       setSearchedRecipes(recipeData);
-      setSearchInput('');
+      setSearchInput("");
     } catch (err) {
       console.error(err);
     }
@@ -89,7 +80,9 @@ const SearchRecipes = () => {
   // create function to handle saving a book to our database
   const handleSaveRecipe = async (recipeId) => {
     // find the book in `searchedBooks` state by the matching id
-    const recipeToSave = searchedRecipes.find((recipe) => recipe.recipeId === recipeId);
+    const recipeToSave = searchedRecipes.find(
+      (recipe) => recipe.recipeId === recipeId
+    );
 
     // get token
     const token = Auth.loggedIn() ? Auth.getToken() : null;
@@ -100,7 +93,7 @@ const SearchRecipes = () => {
     console.log(recipeToSave);
 
     try {
-       await saveRecipe({ variables: recipeToSave });
+      await saveRecipe({ variables: recipeToSave });
 
       // if (!response.ok) {
       //   throw new Error('something went wrong!');
@@ -122,16 +115,16 @@ const SearchRecipes = () => {
             <Row>
               <Col xs={12} md={8}>
                 <Form.Control
-                  name='searchInput'
+                  name="searchInput"
                   value={searchInput}
                   onChange={(e) => setSearchInput(e.target.value)}
-                  type='text'
-                  size='lg'
-                  placeholder='Search for a recipe'
+                  type="text"
+                  size="lg"
+                  placeholder="Search for a recipe"
                 />
               </Col>
               <Col xs={12} md={4}>
-                <Button type='submit' variant='warning' size='lg'>
+                <Button type="submit" variant="warning" size="lg">
                   Search
                 </Button>
               </Col>
@@ -141,35 +134,57 @@ const SearchRecipes = () => {
       </div>
 
       <Container>
-        <h2 className='pt-5 text-center'>
+        <h2 className="pt-5 text-center">
           {searchedRecipes.length
             ? `Viewing ${searchedRecipes.length} results:`
-            : 'Search Results...'}
+            : "Search Results..."}
         </h2>
         <Row>
           {searchedRecipes.map((recipe) => {
             return (
-              <Col md="4" key={recipe.recipeId}>
-                <Card class="card" border='dark'>
+              <Col md="4" key={recipe.recipeId} className="mb-4">
+                <Card class="card" border="dark">
                   <Link as={Link} to={`/recipe/${recipe.recipeId}`}>
                     {recipe.image ? (
-                      <Card.Img src={recipe.image} alt={`The image for ${recipe.title}`} variant='top' />
+                      <Card.Img
+                        border="5rem"
+                        src={recipe.image}
+                        alt={`The image for ${recipe.title}`}
+                        variant="top"
+                      />
                     ) : null}
                   </Link>
                   <Card.Body>
-                    <Link as={Link} to={`/recipe/${recipe.recipeId}`}>
-                      <Card.Title className='text-center'>{recipe.title}</Card.Title>
-                    </Link>
-                    <p className='small text-center'>Source: <a href={`${recipe.sourceUrl}`} target="_blank" rel="noopener noreferrer"> {recipe.source} </a></p>
-                    <Card.Text dangerouslySetInnerHTML={{ __html: recipe.description}}></Card.Text>
+                    <Card.Title className="text-center">
+                      {recipe.title}
+                    </Card.Title>
+                    <p className="small text-center">
+                      Source:{" "}
+                      <a
+                        href={`${recipe.sourceUrl}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {" "}
+                        {recipe.source}{" "}
+                      </a>
+                    </p>
+                    <Card.Text
+                      dangerouslySetInnerHTML={{ __html: recipe.description }}
+                    ></Card.Text>
                     {Auth.loggedIn() && (
                       <Button
-                        disabled={savedRecipeIds?.some((savedRecipeId) => savedRecipeId === recipe.recipeId)}
-                        className='btn-block btn-info'
-                        onClick={() => handleSaveRecipe(recipe.recipeId)}>
-                        {savedRecipeIds?.some((savedRecipeId) => savedRecipeId === recipe.recipeId)
-                          ? 'This recipe has already been saved!'
-                          : 'Save this Recipe!'}
+                        disabled={savedRecipeIds?.some(
+                          (savedRecipeId) => savedRecipeId === recipe.recipeId
+                        )}
+                        className="btn-block btn-dark"
+                        onClick={() => handleSaveRecipe(recipe.recipeId)}
+                      >
+                        {savedRecipeIds?.some(
+                          (savedRecipeId) => savedRecipeId === recipe.recipeId
+                        )
+                          ? "Recipe Saved"
+                          : "Save Recipe"}
                       </Button>
                     )}
                   </Card.Body>
