@@ -90,10 +90,23 @@ const { signToken, AuthenticationError } = require('../utils/auth');
 const resolvers = {
   Query: {
     me: async (parent, args, context) => {
-      if (context.user) {
-        return User.findOne({ _id: context.user._id })
+      try {
+        console.log('Context user:', context.user);
+  
+        if (context.user) {
+          const user = await User.findOne({ _id: context.user._id });
+          console.log('User data:', user);
+  
+          if (user) {
+            return user;
+          }
+        }
+  
+        throw new AuthenticationError('User not authenticated');
+      } catch (error) {
+        console.error('Error in me resolver:', error);
+        throw error;
       }
-      throw AuthenticationError;
     },
   },
 

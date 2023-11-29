@@ -1,20 +1,9 @@
 import { gql } from "@apollo/client";
 
 export const GET_ME = gql`
-query me {
-        recipeCount
-        savedRecipes {
-          recipeId
-          authors
-          description
-          title
-          image
-        }
-      }
-`;
-
-export const QUERY_SINGLE_PROFILE = gql`
-query user {
+query me($profileId: ID!) {
+  username
+  _id
   recipeCount
   savedRecipes {
     recipeId
@@ -24,5 +13,4 @@ query user {
     image
   }
 }
-
-`
+`;
