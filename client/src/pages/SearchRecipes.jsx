@@ -16,6 +16,7 @@ import { searchSpoonacularRecipes } from '../utils/API';
 import { saveRecipeIds, getSavedRecipeIds } from '../utils/localStorage';
 
 const SearchRecipes = () => {
+  const [customRecipes, setCustomRecipes] = useState([]);
   // create state for holding returned spoonacular api data
   const [searchedRecipes, setSearchedRecipes] = useState([]);
   // create state for holding our search field data
@@ -41,12 +42,28 @@ const SearchRecipes = () => {
     }
 
     try {
+
+      const customResponse = await localStorage.getItem(searchInput);
+
       const response = await searchSpoonacularRecipes(searchInput);
 
       if (!response.ok) {
         throw new Error('something went wrong!');
       }
+     
+        
+      const itemsCustom = customResponse
 
+      console.log('Items: ', itemsCustom)
+      if (itemsCustom) {
+        const customRecipeData = itemsCustom.map((recipe) => ({
+          recipeId: recipe.id,
+          source: recipe.sourceName || ['No source to display'],
+          title: recipe.title,
+          description: recipe.summary,
+        }));
+        setCustomRecipes(customRecipeData);
+      }
       const data = await response.json();
       const items = data.results
 

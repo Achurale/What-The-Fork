@@ -8,7 +8,6 @@ import SearchRecipes from './pages/SearchRecipes'
 import SavedRecipes from './pages/SavedRecipes'
 import CreateRecipes from './pages/CreateRecipes.jsx'
 import Profile from './pages/Profile.jsx'
-import Saved from './pages/RecipePage.jsx'
 
 import About from './pages/About';
 import RecipePage from './pages/RecipePage.jsx'
@@ -46,10 +45,10 @@ const router = createBrowserRouter([
         path: '/recipe/:id',
         element: <RecipePage/>
       },
-      {
-        path: '/saved/:id',
-        element: <SavedRecipes />
-      }
+      // {
+      //   path: '/saved',
+      //   element: <SavedRecipes />
+      // }
     ]
   }
 ])
