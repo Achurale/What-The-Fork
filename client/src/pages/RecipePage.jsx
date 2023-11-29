@@ -35,11 +35,11 @@ const RecipePage = () => {
       <Container>
         <Col md={8} className='mx-auto'>
           {recipeData && (
-            <Card className='w-100'>
+            <Card className=' my-4'>
               <Row>
                 <Col md={6}>
                   <Card.Body>
-                    <Card.Title>{recipeData.title}</Card.Title>
+                    <Card.Title className='text-center'>{recipeData.title}</Card.Title>
                     <Card.Text dangerouslySetInnerHTML={{ __html: recipeData.summary}}></Card.Text>
                   </Card.Body>
                 </Col>
@@ -49,10 +49,10 @@ const RecipePage = () => {
               </Row>
             </Card>
           )}
-
+          
           {recipeData && recipeData.extendedIngredients && (
-            <Card>
-              <Card.Title>Ingredients</Card.Title>
+            <Card className='px-4 py-2 my-4'>
+              <Card.Title className='text-center py-2'>Ingredients</Card.Title>
               <ul>
                 {recipeData.extendedIngredients.map((ingredient, index) => (
                   <li key={index}>{ingredient.original}</li>
@@ -62,8 +62,8 @@ const RecipePage = () => {
           )}
 
           {recipeData && recipeData.analyzedInstructions && (
-            <Card>
-              <Card.Title>Instructions</Card.Title>
+            <Card className='px-4 py-2 my-4'>
+              <Card.Title className='text-center py-2'>Instructions</Card.Title>
               <ul>
                 {recipeData.analyzedInstructions[0]?.steps.map((step, index) => (
                   <li key={index}>{step.step}</li>

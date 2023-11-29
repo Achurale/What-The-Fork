@@ -91,11 +91,9 @@ const resolvers = {
   Query: {
     me: async (parent, args, context) => {
       try {
-        console.log('Context user:', context.user);
   
         if (context.user) {
           const user = await User.findOne({ _id: context.user._id });
-          console.log('User data:', user);
   
           if (user) {
             return user

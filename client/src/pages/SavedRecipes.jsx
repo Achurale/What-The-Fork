@@ -4,6 +4,7 @@ import { Container, Card, Button, Row, Col } from "react-bootstrap";
 import { GET_ME } from "../utils/queries";
 import { REMOVE_RECIPE } from "../utils/mutations";
 import { removeRecipeId } from "../utils/localStorage";
+import {Link} from 'react-router-dom'
 
 import Auth from "../utils/auth";
 import { useEffect } from "react";
@@ -65,15 +66,19 @@ useEffect(() => {
             return (
               <Col md="4" key={recipe.recipeId}>
                 <Card key={recipe.recipeId} border="dark">
-                  {recipe.image ? (
-                    <Card.Img
-                      src={recipe.image}
-                      alt={`The cover for ${recipe.title}`}
-                      variant="top"
-                    />
-                  ) : null}
+                  <Link as={Link} to={`/recipe/${recipe.recipeId}`}>
+                    {recipe.image ? (
+                      <Card.Img
+                        src={recipe.image}
+                        alt={`The cover for ${recipe.title}`}
+                        variant="top"
+                      />
+                    ) : null}
+                  </Link>
                   <Card.Body>
-                    <Card.Title>{recipe.title}</Card.Title>
+                    <Link as={Link} to={`/recipe/${recipe.recipeId}`}>
+                      <Card.Title className="text-center">{recipe.title}</Card.Title>
+                    </Link>
                     <p className="small">Authors: {recipe.authors}</p>
                     <Card.Text dangerouslySetInnerHTML={{ __html: recipe.description}}></Card.Text>
                     <Button
