@@ -13,6 +13,23 @@ const app = express();
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  context: authMiddleware,
+  plugins: [
+    {
+      requestDidStart(requestContext) {
+        console.log('GraphQL request received:', requestContext.request.query);
+        return {
+          executionDidStart: () => {
+            return {
+              executionDidEnd: (execution) => {
+                console.log('GraphQL response sent:', JSON.stringify(execution, null, 2));
+              },
+            };
+          },
+        };
+      },
+    }
+  ]
 });
 
 // Create a new instance of an Apollo server with the GraphQL schema
