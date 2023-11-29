@@ -14,6 +14,7 @@ const AppNavbar = () => {
   useEffect(() => {
     if (Auth.loggedIn()) {
       setUserId(Auth.getProfile().data._id)
+      
     } else {
       setUserId(null)
     }
