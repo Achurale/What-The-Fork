@@ -15,15 +15,11 @@ export const saveRecipeIds = (recipeIdArr) => {
 };
 
 export const removeRecipeId = (recipeId) => {
-  const savedRecipeIds = localStorage.getItem('saved_recipes')
-    ? JSON.parse(localStorage.getItem('saved_recipes'))
-    : null;
-
+  const savedRecipeIds = JSON.parse(localStorage.getItem('saved_recipes'))
   if (!savedRecipeIds) {
     return false;
   }
-
-  const updatedSavedRecipeIds = savedRecipeIds?.filter((savedRecipeId) => savedRecipeId !== recipeId);
+  const updatedSavedRecipeIds = savedRecipeIds.filter((savedRecipes) => savedRecipes != recipeId);
   localStorage.setItem('saved_recipes', JSON.stringify(updatedSavedRecipeIds));
 
   return true;
