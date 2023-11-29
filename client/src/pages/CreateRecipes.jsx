@@ -6,7 +6,8 @@ import { ADD_RECIPE } from "../utils/mutations";
 
 import Auth from "../utils/auth";
   const Inputs = ({ formData, handleInputChange, handleDeleteIngredient }) =>{
-  
+
+
    return formData.ingredients.map((_item, index) => (
       <InputGroup className="mb-4" key={index}>
         <Form.Control
@@ -30,13 +31,13 @@ import Auth from "../utils/auth";
     ));
   }
 const CreateRecipes = () => {
+    
+  const [addRecipe, { error }] = useMutation(ADD_RECIPE);
   const [formData, setFormData] = useState({
     title: "",
     ingredients: ["", "", "", "", ""],
     directions: "",
   });
-
-  // const [inputGroup, setInputGroup] = useState(5);
 
   const handleInputChange = (e, index) => {
     const { value } = e.target;
@@ -59,6 +60,24 @@ const CreateRecipes = () => {
     // TODO: remove ingredient from specified index from formData.ingredients 
   };
 
+  const handleAddRecipe = async (formData) => {
+    const token = Auth.loggedIn() ? Auth.getToken() : null;
+
+    if (!token) {
+      return false;
+    }
+
+    try {
+      await addRecipe({ variables: {title: formData.title, 
+        ingredient: formData.ingredient,
+        directions: formData.directions } });
+      
+      addRecipe(formData);
+      // upon success, remove book's id from localStorage
+    } catch (err) {
+      console.error(err);
+    }
+  }
 
 
   return (
@@ -75,7 +94,7 @@ const CreateRecipes = () => {
             <Form className='w-75 mx-auto'>
               <Form.Group className="mb-4" controlId="title">
                 <Form.Label>Title</Form.Label>
-                <Form.Control type="text" placeholder="Title" />
+                <Form.Control type="text" placeholder="Title" onChange={e => setFormData({...formData, title: e.target.value})}/>
               </Form.Group>
               <Form.Label>Ingredients</Form.Label>
               <Inputs formData={formData} handleInputChange={handleInputChange} handleDeleteIngredient={handleDeleteIngredient}/>
@@ -88,13 +107,14 @@ const CreateRecipes = () => {
               </Button>
               <Form.Group className="mb-4" controlId="directions">
                 <Form.Label>Directions</Form.Label>
-                <Form.Control as="textarea" rows={5} />
+                <Form.Control as="textarea" rows={5} onChange={e => setFormData({...formData, directions: e.target.value})}/>
               </Form.Group>
               <Button
                 variant="primary"
                 type="submit"
                 className="mb-4 w-100"
                 size="lg"
+                onSubmit={handleAddRecipe(formData.formData)}
               >
                 Create Recipe
                 {/* Use submit button to send information to profile page with a card of the given recipe */}
