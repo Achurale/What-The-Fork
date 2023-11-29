@@ -23,17 +23,20 @@ const AppNavbar = () => {
   return (
     <>
       <Navbar expand="lg" id="navbar">
-        <Container fluid>
-          <Navbar.Brand as={Link} to="/">
-            <img src='./Whatthefork.png' width="150px" alt="WhatTheFork Logo"></img>
-          </Navbar.Brand>
+        <Container>
+          <div className="d-flex align-items-center">
+            <Navbar.Brand as={Link} to="/">
+              <img src='./Whatthefork.png' width="150px" alt="WhatTheFork Logo"></img>
+            </Navbar.Brand>
 
-          <h1>What the Fork?</h1>
+            <h1>What the Fork?</h1>
+          </div>
+          
 
           <Navbar.Toggle aria-controls="navbar" aria-expanded="false"/>
           <Navbar.Collapse id="navbar" >
-            <Nav className="d-flex justify-content-end">
-              <Nav.Link as={Link} to="/">
+            <Nav className="nav justify-content-end">
+              <Nav.Link as={Link} to="/search">
                 Search Recipes
               </Nav.Link>
               <Nav.Link as={Link} to="/about">
