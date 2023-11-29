@@ -20,7 +20,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <SearchRecipes />
+        element: <Profile />
       }, {
         path: '/saved',
         element: <SavedRecipes />
@@ -34,10 +34,6 @@ const router = createBrowserRouter([
         element: <Profile />
       },
       {
-        path: '/profile',
-        element: <Profile />
-      },
-      {
         path: '/about',
         element: <About />
       },
@@ -45,6 +41,10 @@ const router = createBrowserRouter([
         path: '/recipe/:id',
         element: <RecipePage/>
       },
+      {
+        path: '/search',
+        element: <SearchRecipes/>
+      }
       // {
       //   path: '/saved',
       //   element: <SavedRecipes />

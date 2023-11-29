@@ -23,46 +23,51 @@ const AppNavbar = () => {
   return (
     <>
       <Navbar expand="lg" id="navbar">
-        <Container fluid>
-          <Navbar.Brand as={Link} to="/">
-            <img src='./Whatthefork.png' width="150px" alt="WhatTheFork Logo"></img>
-          </Navbar.Brand>
+        <Container>
+          <div className="d-flex align-items-center">
+            <Navbar.Brand as={Link} to="/">
+              <img src='./Whatthefork.png' width="150px" alt="WhatTheFork Logo"></img>
+            </Navbar.Brand>
 
-          <h1>What the Fork?</h1>
+            <h1>What the Fork?</h1>
+          </div>
+          
 
           <Navbar.Toggle aria-controls="navbar" aria-expanded="false"/>
-          <Navbar.Collapse id="navbar" >
-            <Nav className="d-flex justify-content-end">
-              <Nav.Link as={Link} to="/">
-                Search Recipes
-              </Nav.Link>
-              <Nav.Link as={Link} to="/about">
-                About
-              </Nav.Link>
-              {/* if user is logged in show saved recipes, create recipes, profile and logout */}
-              {Auth.loggedIn() ? (
-                <>
-                  <Nav.Link as={Link} to="/create">
-                    Create Recipe
-                  </Nav.Link>
-                  <Nav.Link as={Link} to="/saved">
-                    Favorites
-                  </Nav.Link>
-                  <Nav.Link as={Link} to={`/profile/${userId}`}>
-                    Profile
-                  </Nav.Link>
+          <Navbar.Collapse id="navbar" className="d-flex justify-content-end">
+            <div>
+              <Nav>
+                <Nav.Link as={Link} to="/search">
+                  Search Recipes
+                </Nav.Link>
+                <Nav.Link as={Link} to="/about">
+                  About
+                </Nav.Link>
+                {/* if user is logged in show saved recipes, create recipes, profile and logout */}
+                {Auth.loggedIn() ? (
+                  <>
+                    <Nav.Link as={Link} to="/create">
+                      Create Recipe
+                    </Nav.Link>
+                    <Nav.Link as={Link} to="/saved">
+                      Favorites
+                    </Nav.Link>
+                    <Nav.Link as={Link} to={`/profile/${userId}`}>
+                      Profile
+                    </Nav.Link>
 
-                  
-                  <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
-                </>
-              ) : (
-                <>
-                  <Nav.Link onClick={() => setShowModal(true)}>
-                    Login/Sign Up
-                  </Nav.Link>
-                </>
-              )}
-            </Nav>
+                    
+                    <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
+                  </>
+                ) : (
+                  <>
+                    <Nav.Link onClick={() => setShowModal(true)}>
+                      Login/Sign Up
+                    </Nav.Link>
+                  </>
+                )}
+              </Nav>
+            </div>
           </Navbar.Collapse>
         </Container>
       </Navbar>
