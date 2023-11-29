@@ -98,7 +98,7 @@ const resolvers = {
           console.log('User data:', user);
   
           if (user) {
-            return user;
+            return user
           }
         }
   

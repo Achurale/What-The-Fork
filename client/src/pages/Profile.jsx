@@ -9,13 +9,7 @@ const Profile = () => {
   console.log('Token: ', Token)
 
   // If there is no `profileId` in the URL as a parameter, execute the `GET_ME` query instead for the logged-in user's information
-  const { loading, error, data } = useQuery(GET_ME, {
-    context: {
-      headers: {
-        Authorization: `Bearer ${Token}`
-      }
-    }
-  });
+  const { loading, error, data } = useQuery(GET_ME);
   // Check for errors
   if (error) {
     console.error('Apollo Query Error: ', error);
