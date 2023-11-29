@@ -1,26 +1,29 @@
-import { Navigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
-import Auth from '../utils/auth';
+import { useEffect } from "react";
 
 const Profile = () => {
   const { profileId } = useParams();
-  const Token = Auth.getToken()
-  console.log('Token: ', Token)
 
   // If there is no `profileId` in the URL as a parameter, execute the `GET_ME` query instead for the logged-in user's information
   const { loading, error, data } = useQuery(GET_ME);
+
+  // Check if data is returning from the `GET_ME` query
+  const profile = data?.me || {};
+
+  useEffect(() => {
+    console.log("loading", loading)
+    console.log("data", data);
+    console.log("profile", profile);
+  }, [data]);
+  
   // Check for errors
   if (error) {
     console.error('Apollo Query Error: ', error);
     return <h1 className='text-center'>Error loading data</h1>;
   }
 
-  console.log('data', data)
-  // Check if data is returning from the `GET_ME` query
-  const profile = data?.me || {};
-
-  console.log('profile',profile)
 
   // Use React Router's `<Navigate />` component to redirect to the personal profile page if the username is the logged-in user's
   // if (Auth.loggedIn() && Auth.getProfile().data._id === profileId) {
