@@ -77,7 +77,7 @@ useEffect(() => {
                   <Card.Body>
                     <Card.Title>{recipe.title}</Card.Title>
                     {/* <p className="small">Authors: {recipe.authors}</p> */}
-                    <Card.Text>{recipe.description}</Card.Text>
+                    <Card.Text dangerouslySetInnerHTML={{ __html: recipe.description}}></Card.Text>
                     <Button
                       className="btn-block btn-danger"
                       onClick={() => handleDeleteRecipe(recipe.recipeId)}
