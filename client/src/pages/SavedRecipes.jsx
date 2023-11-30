@@ -49,38 +49,35 @@ useEffect(() => {
     <>
       <div fluid className="text-dark bg-light p-5">
         <Container className='text-center'>
-          <h1>Viewing favorite recipes!</h1>
+          <h1>Viewing favorite recipes:</h1>
         </Container>
       </div>
 
       <Container>
-        <h2 className="pt-5 text-center">
+        <h2 className="pt-5 text-cente">
           {userData.savedRecipes?.length
             ? `Viewing ${userData.savedRecipes.length} saved ${
                 userData.savedRecipes.length === 1 ? "recipe" : "recipes"
               }:`
-            : "You have no saved recipes!"}
+            : "You have no saved recipes"}
         </h2>
         <Row>
           {userData.savedRecipes?.map((recipe) => {
             return (
-              <Col md="4" key={recipe.recipeId}>
+              <Col md="4" key={recipe.recipeId} className="mb-4">
                 <Card key={recipe.recipeId} border="dark">
-                  <Link as={Link} to={`/recipe/${recipe.recipeId}`}>
-                    {recipe.image ? (
-                      <Card.Img
-                        src={recipe.image}
-                        alt={`The cover for ${recipe.title}`}
-                        variant="top"
-                      />
-                    ) : null}
-                  </Link>
+                  {recipe.image ? (
+                    <Card.Img
+                      border='5rem'
+                      src={recipe.image}
+                      alt={`The image for ${recipe.title}`}
+                      variant="top"
+                    />
+                  ) : null}
                   <Card.Body>
-                    <Link as={Link} to={`/recipe/${recipe.recipeId}`}>
-                      <Card.Title className="text-center">{recipe.title}</Card.Title>
-                    </Link>
-                    <p className="small">Authors: {recipe.authors}</p>
-                    <Card.Text dangerouslySetInnerHTML={{ __html: recipe.description}}></Card.Text>
+                    <Card.Title>{recipe.title}</Card.Title>
+                    {/* <p className="small">Authors: {recipe.authors}</p> */}
+                    <Card.Text>{recipe.description}</Card.Text>
                     <Button
                       className="btn-block btn-danger"
                       onClick={() => handleDeleteRecipe(recipe.recipeId)}
